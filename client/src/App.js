@@ -1,3 +1,4 @@
+import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './App.css'
 import JoinRoom from './routes/joinRoom/JoinRoom'
