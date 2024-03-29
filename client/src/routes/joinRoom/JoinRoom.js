@@ -6,12 +6,12 @@ function JoinRoom() {
     const [username, setUsername] = useState("")
     const [roomId, setRoomId] = useState("")
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (event) => {
+        console.log(event.target.value);
     }
 
-    const createRoomId = () => {
-
+    const createRoomId = (event) => {
+        console.log(event.target.value);
     }
     return (
         <div>
