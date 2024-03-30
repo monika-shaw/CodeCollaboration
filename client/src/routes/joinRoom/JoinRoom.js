@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-
+import { v4 as uuidv4, validate } from 'uuid'
+import toast, { Toaster } from 'react-hot-toast';
 
 function JoinRoom() {
 
@@ -12,6 +13,14 @@ function JoinRoom() {
 
     const createRoomId = (event) => {
         console.log(event.target.value);
+        try
+        {
+            setRoomId(uuidv4(""))
+            toast.success("Room Id created")
+        }
+        catch{
+
+        }
     }
     return (
         <div>
@@ -47,7 +56,7 @@ function JoinRoom() {
                     <span onClick={(event) => createRoomId(event)}>own room</span>
                 </p>
             </form>
-
+        <Toaster/>
         </div>
     )
 }
