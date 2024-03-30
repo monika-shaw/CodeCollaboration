@@ -1,24 +1,33 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4, validate } from 'uuid'
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function JoinRoom() {
+    const navigate = useNavigate()
 
     const [username, setUsername] = useState("")
     const [roomId, setRoomId] = useState("")
 
     const handleSubmit = (event) => {
+        event.preventDefault()
+
+        if (!validate(roomId)){
+            toast.error("Invalid RoomId")
+            return
+        }
+
+        username && navigate(`/room/${roomId}`, { state: { username } })
         console.log(event.target.value);
     }
 
     const createRoomId = (event) => {
         console.log(event.target.value);
-        try
-        {
+        try {
             setRoomId(uuidv4(""))
             toast.success("Room Id created")
         }
-        catch{
+        catch {
 
         }
     }
@@ -51,12 +60,12 @@ function JoinRoom() {
                     </label>
                 </div>
 
-                <button>Join</button>
+                <button type='submit'>Join</button>
                 <p>Don't have a room id create your
                     <span onClick={(event) => createRoomId(event)}>own room</span>
                 </p>
             </form>
-        <Toaster/>
+            <Toaster />
         </div>
     )
 }
