@@ -12,6 +12,15 @@ import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/mode-csharp";
 import "ace-builds/src-noconflict/mode-c_cpp";
 
+
+import "ace-builds/src-noconflict/keybinding-emacs";
+import "ace-builds/src-noconflict/keybinding-vim";
+
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/ext-language_tools";
+import "ace-builds/src-noconflict/ext-searchbox";
+
+
 function Room() {
 
   const copyToClipBoard = () => {
