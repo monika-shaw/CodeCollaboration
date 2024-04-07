@@ -22,33 +22,43 @@ import "ace-builds/src-noconflict/ext-searchbox";
 
 function Room() {
 
-  const copyToClipBoard = () => {
+    const copyToClipBoard = () => {
 
-  }
-  return (
-    <div>
-      <div className='roomSideBar'>
-        <div className='roomsidearWrapper'>
-          <div className='languageFieldWrapper'>
-            <select className='languageField' name='language' id='language'></select>
-          </div>
-          <div className='languageFieldWrapper'>
-            <select className='languageField' name='language' id='language'></select>
-          </div>
-          <p>Connected Users:</p>
-          <div className='roomSidebarUsers'>
+    }
+    return (
+        <div>
+            <div className='roomSideBar'>
+                <div className='roomsidearWrapper'>
+                    <div className='languageFieldWrapper'>
+                        <select className='languageField' name='language' id='language'></select>
+                    </div>
+                    <div className='languageFieldWrapper'>
+                        <select className='languageField' name='language' id='language'></select>
+                    </div>
+                    <p>Connected Users:</p>
+                    <div className='roomSidebarUsers'>
 
-          </div>
+                    </div>
 
-          <button onClick={copyToClipBoard}>Copy Room Id</button>
-          <button>Leave Room</button>
+                    <button onClick={copyToClipBoard}>Copy Room Id</button>
+                    <button>Leave Room</button>
+                </div>
+            </div>
+            <AceEditor
+                placeholder='Write your code here'
+                className='roomCodeEditor'
+                mode='javascript'
+                theme='monokai'
+                name='collabEditor'
+                showPrintMargin={true}
+                showGutter={true}
+                tabSize={4}
+                editorProps={{
+                    $blockScrolling:true
+                }}
+            />
         </div>
-      </div>
-      <AceEditor
-        placeholder='Write your code here'
-      />
-    </div>
-  )
+    )
 }
 
 export default Room
