@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { v4 as uuidv4, validate } from 'uuid'
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -27,8 +27,8 @@ function JoinRoom() {
             setRoomId(uuidv4(""))
             toast.success("Room Id created")
         }
-        catch {
-
+        catch(error) {
+            console.log(error);
         }
     }
     return (
@@ -61,7 +61,7 @@ function JoinRoom() {
                 </div>
 
                 <button type='submit'>Join</button>
-                <p>Don't have a room id create your
+                <p>Do not have a room id create your
                     <span onClick={(event) => createRoomId(event)}>own room</span>
                 </p>
             </form>
