@@ -22,6 +22,8 @@ import "ace-builds/src-noconflict/ext-searchbox";
 
 function Room() {
 
+    const languageAvailable = ["javascript", "typescript", "java", "python", "yaml", "css", "golang", "c++", "css", "html"]
+    const codeKeyBinding = ["default", "emacs", "vim"]
     const copyToClipBoard = () => {
 
     }
@@ -30,10 +32,18 @@ function Room() {
             <div className='roomSideBar'>
                 <div className='roomsidearWrapper'>
                     <div className='languageFieldWrapper'>
-                        <select className='languageField' name='language' id='language'></select>
+                        <select className='languageField' name='language' id='language'>
+                            {languageAvailable.map((lang)=>(
+                                <option value={lang} key={lang}>{lang}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className='languageFieldWrapper'>
-                        <select className='languageField' name='language' id='language'></select>
+                        <select className='languageField' name='language' id='language'>
+                        {codeKeyBinding.map((code)=>(
+                                <option value={code} key={code}>{code}</option>
+                            ))}
+                        </select>
                     </div>
                     <p>Connected Users:</p>
                     <div className='roomSidebarUsers'>
