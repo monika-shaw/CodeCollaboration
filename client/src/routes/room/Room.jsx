@@ -1,5 +1,5 @@
 import AceEditor from 'react-ace'
-
+import toast, { Toaster } from 'react-hot-toast';
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-typescript";
@@ -19,10 +19,11 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/ext-searchbox";
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 
 function Room() {
-
+    const { roomId } = useParams()
     const languageAvailable = ["javascript", "typescript", "java", "python", "yaml", "css", "golang", "c++", "css", "html"]
     const codeKeyBinding = ["default", "emacs", "vim"]
 
@@ -37,8 +38,14 @@ function Room() {
     const handleLanguage = (event) => {
         setlanguage(event.target.value)
     }
-    const copyToClipBoard = () => {
-
+    const copyToClipBoard = (text) => {
+        try {
+            navigator.clipboard.writeText(text)
+            toast.success("Room ID copied")
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
     return (
         <div>
@@ -52,7 +59,7 @@ function Room() {
                         </select>
                     </div>
                     <div className='languageFieldWrapper'>
-                        <select className='languageField' value={ codeKey} name='language' id='language' onChange={(event) => handleCodeKey(event)}>
+                        <select className='languageField' value={codeKey} name='language' id='language' onChange={(event) => handleCodeKey(event)}>
                             {codeKeyBinding.map((code) => (
                                 <option value={code} key={code}>{code}</option>
                             ))}
@@ -63,7 +70,7 @@ function Room() {
 
                     </div>
 
-                    <button onClick={copyToClipBoard}>Copy Room Id</button>
+                    <button onClick={() => copyToClipBoard(roomId)}>Copy Room Id</button>
                     <button>Leave Room</button>
                 </div>
             </div>
@@ -81,6 +88,7 @@ function Room() {
                     $blockScrolling: true
                 }}
             />
+            <Toaster />
         </div>
     )
 }
