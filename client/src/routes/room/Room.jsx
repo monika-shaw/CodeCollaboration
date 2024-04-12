@@ -18,12 +18,25 @@ import "ace-builds/src-noconflict/keybinding-vim";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/ext-searchbox";
+import { useState } from 'react';
 
 
 function Room() {
 
     const languageAvailable = ["javascript", "typescript", "java", "python", "yaml", "css", "golang", "c++", "css", "html"]
     const codeKeyBinding = ["default", "emacs", "vim"]
+
+    const [codeKey, setcodeKey] = useState(undefined)
+
+    const [language, setlanguage] = useState('javascript')
+
+    const handleCodeKey = (event) => {
+        setcodeKey(event.target.value === 'default' ? undefined : event.target.value)
+    }
+
+    const handleLanguage = (event) => {
+        setlanguage(event.target.value)
+    }
     const copyToClipBoard = () => {
 
     }
@@ -32,15 +45,15 @@ function Room() {
             <div className='roomSideBar'>
                 <div className='roomsidearWrapper'>
                     <div className='languageFieldWrapper'>
-                        <select className='languageField' name='language' id='language'>
-                            {languageAvailable.map((lang)=>(
+                        <select className='languageField' value={language} name='language' id='language' onChange={(event) => handleLanguage(event)}>
+                            {languageAvailable.map((lang) => (
                                 <option value={lang} key={lang}>{lang}</option>
                             ))}
                         </select>
                     </div>
                     <div className='languageFieldWrapper'>
-                        <select className='languageField' name='language' id='language'>
-                        {codeKeyBinding.map((code)=>(
+                        <select className='languageField' value={ codeKey} name='language' id='language' onChange={(event) => handleCodeKey(event)}>
+                            {codeKeyBinding.map((code) => (
                                 <option value={code} key={code}>{code}</option>
                             ))}
                         </select>
@@ -57,14 +70,15 @@ function Room() {
             <AceEditor
                 placeholder='Write your code here'
                 className='roomCodeEditor'
-                mode='javascript'
+                mode={language}
+                keyboardHandler={codeKey}
                 theme='monokai'
                 name='collabEditor'
                 showPrintMargin={true}
                 showGutter={true}
                 tabSize={4}
                 editorProps={{
-                    $blockScrolling:true
+                    $blockScrolling: true
                 }}
             />
         </div>
