@@ -31,6 +31,8 @@ function Room() {
 
     const [language, setlanguage] = useState('javascript')
 
+    const [fetchUsers, setfetchUsers] = useState(()=>["username","sam"])
+
     const handleCodeKey = (event) => {
         setcodeKey(event.target.value === 'default' ? undefined : event.target.value)
     }
@@ -67,7 +69,12 @@ function Room() {
                     </div>
                     <p>Connected Users:</p>
                     <div className='roomSidebarUsers'>
-
+                                {fetchUsers.map((eachUser)=>(
+                                    <div key={eachUser}>
+                                        <div>avtar</div>
+                                        <div>name</div>
+                                    </div>
+                                ))}
                     </div>
 
                     <button onClick={() => copyToClipBoard(roomId)}>Copy Room Id</button>
