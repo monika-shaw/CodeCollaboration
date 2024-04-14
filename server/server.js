@@ -23,7 +23,11 @@ const socket_ID_USERS = {}
 const roomID_USERS = {}
 
 io.on('connection', function(socket){
-    
+    socket.on("when a user joins", async ({username, roomId}) => {
+        socket_ID_USERS[socket.id] = {username}
+        socket.join(roomId)
+        
+    })
 })
 
 
